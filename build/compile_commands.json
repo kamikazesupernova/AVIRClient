@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/wkell/OneDrive/Documents/projectsc/AVIRclient/build",
+  "command": "C:\\MinGW\\bin\\gcc.exe  @CMakeFiles/AVIRCLIENT.dir/includes_C.rsp -g -o CMakeFiles\\AVIRCLIENT.dir\\AVIRclient.c.obj -c C:\\Users\\wkell\\OneDrive\\Documents\\projectsc\\AVIRclient\\AVIRclient.c",
+  "file": "C:/Users/wkell/OneDrive/Documents/projectsc/AVIRclient/AVIRclient.c"
+}
+]

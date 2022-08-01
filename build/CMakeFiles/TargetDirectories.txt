@@ -1,0 +1,3 @@
+C:/Users/wkell/OneDrive/Documents/projectsc/AVIRclient/build/CMakeFiles/AVIRCLIENT.dir
+C:/Users/wkell/OneDrive/Documents/projectsc/AVIRclient/build/CMakeFiles/edit_cache.dir
+C:/Users/wkell/OneDrive/Documents/projectsc/AVIRclient/build/CMakeFiles/rebuild_cache.dir

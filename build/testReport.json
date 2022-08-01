@@ -1,0 +1,42 @@
+{
+    "createTime": "2022-07-12T16:16:24.735Z",
+    "detectTime": "2022-07-12T16:16:24.735Z",
+    "eventTime": "2022-07-12T16:16:24.735Z",
+    "ceaseTime": "2022-07-12T16:16:24.735Z",
+    "category": "Fraud",
+    "ref": "CVE",
+    "note": "Example",
+    "connCount": 20,
+    "source": [
+        {
+            "type": "Scamming",
+            "iP4": "192.168.0.2-192.168.0.5",
+            "hostname": "scamster.com",
+            "url": "http://scamming.com/cgi-bin/runscam",
+            "attachHand": "att1"
+        }
+    ],
+    "target": [
+        {
+            "type": "Scam",
+            "email": "companyemail@comp.com",
+            "spoofed": true
+        }
+    ],
+    "attach": [
+        {
+            "handle": "att",
+            "fileName": "openme",
+            "type": "pdf"
+        }
+    ],
+    "node": {
+        "name": "KellysTesla",
+        "gpsLatitude": 17.679,
+        "gpsLongitude": 15.306,
+        "vehicleStatus": "Stopped",
+        "gpsSpeed": 120,
+        "gpsDirection": "North",
+        "engineStatus": true
+    }
+}

@@ -1,0 +1,1 @@
+ "C:/vcpkg/installed/x86-windows/debug/lib/json-c.lib" "C:/vcpkg/installed/x86-windows/debug/lib/libcurl-d.lib" -lwinmm -lws2_32 "C:/vcpkg/installed/x86-windows/debug/lib/zlibd.lib" -ladvapi32 -lcrypt32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

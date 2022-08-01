@@ -1,0 +1,40 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc.exe build active file",
+			"command": "C:\\MinGW\\bin\\gcc.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-I",
+				"C:\\vcpkg\\packages\\curl_x64-windows-static\\include",
+				"-I",
+				"C:\\json-c.win32.v120.Debug\\include",
+				"-L",
+				"C:\\curl-7.84.0_6-win64-mingw\\curl-7.84.0_6-win64-mingw\\lib",				
+				"-L",
+				"C:\\json-c.win32.v120.Debug\\lib",	
+				"-lcurl",		
+				"-ljson-c"
+
+				
+			],
+			"options": {
+				"cwd": "C:\\MinGW\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: C:\\MinGW\\bin\\gcc.exe"
+		}
+	]
+}
