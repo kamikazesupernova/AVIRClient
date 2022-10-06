@@ -6,13 +6,7 @@
 #define CURL_STATICLIB 
 #include <curl\curl.h>
 #include <json-c\json.h>
-#include <signal.h>
-#include <string.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-
-
-
+/* This program is the windows version of the client */
 
 /* holder for curl fetch */
 struct curl_fetch_st {
@@ -22,97 +16,16 @@ struct curl_fetch_st {
 
 static char *conf_file_name = "testReport.json";
 static char *conf_file_profiles = "testProfiles.json";
-static char *pid_file_name = NULL;
-static int pid_fd = -1;
 static char *url_IncidentReport ="https://localhost:7106/api/IncidentReport";
 static char *url_ThreatReport ="https://localhost:7106/api/ThreatProfile";
 json_object *json_root = NULL;
 json_object *jobj = NULL;
-
-/**
- * This function will demonize the process
- */
-static void daemonize()
-{
-	pid_t pid = 0;
-	int fd;
-
-	/* Fork off the parent process */
-	pid = fork();
-
-	/* An error occurred */
-	if (pid < 0) {
-		exit(EXIT_FAILURE);
-	}
-
-	/* Success: Let the parent terminate */
-	if (pid > 0) {
-		exit(EXIT_SUCCESS);
-	}
-
-	/* On success: The child process becomes session leader */
-	if (setsid() < 0) {
-		exit(EXIT_FAILURE);
-	}
-
-	/* Ignore signal sent from child to parent process */
-	signal(SIGCHLD, SIG_IGN);
-
-	/* Fork off for the second time*/
-	pid = fork();
-
-	/* An error occurred */
-	if (pid < 0) {
-		exit(EXIT_FAILURE);
-	}
-
-	/* Success: Let the parent terminate */
-	if (pid > 0) {
-		exit(EXIT_SUCCESS);
-	}
-
-	/* Set new file permissions */
-	umask(0);
-
-	/* Change the working directory to the root directory */
-	/* or another appropriated directory */
-	chdir("/");
-
-	/* Close all open file descriptors */
-	for (fd = sysconf(_SC_OPEN_MAX); fd > 0; fd--) {
-		close(fd);
-	}
-
-	/* Reopen stdin (fd = 0), stdout (fd = 1), stderr (fd = 2) */
-	stdin = fopen("/dev/null", "r");
-	stdout = fopen("/dev/null", "w+");
-	stderr = fopen("/dev/null", "w+");
-
-	/* Try to write PID of daemon to lockfile */
-	if (pid_file_name != NULL)
-	{
-		char str[256];
-		pid_fd = open(pid_file_name, O_RDWR|O_CREAT, 0640);
-		if (pid_fd < 0) {
-			/* Can't open lockfile */
-			exit(EXIT_FAILURE);
-		}
-		if (lockf(pid_fd, F_TLOCK, 0) < 0) {
-			/* Can't lock file */
-			exit(EXIT_FAILURE);
-		}
-		/* Get current PID */
-		sprintf(str, "%d\n", getpid());
-		/* Write PID to lockfile */
-		write(pid_fd, str, strlen(str));
-	}
-}
-
+/* This functions deletes previous requests*/
 void clearFile()
 {
   fclose(fopen(conf_file_name, "w"));
 }
-
+/* This functions appends profiles to a flat file */
 static boolean addProfile(){
       // create file if it doesn't exist
     FILE* fp;
@@ -244,7 +157,7 @@ CURLcode curl_fetch_url(CURL *ch, const char *url, struct curl_fetch_st *fetch) 
     /* return */
     return rcode;
 }
-
+/* This functions sends incident reports */
 int postRequest(char *url, char *endpoint){
     CURL *ch;                                               /* curl handle */
     CURLcode rcode;                                         /* curl result code */
@@ -336,7 +249,7 @@ int postRequest(char *url, char *endpoint){
     /* exit */
     return 0;
 }
-
+/* This functions creates json objects */
  int parseJson(){
 
    json_root = json_object_from_file(conf_file_name);
@@ -347,7 +260,7 @@ int postRequest(char *url, char *endpoint){
   
   return 0;
 }
-
+/* This functions retrieves threat profiles */
 int getThreatProfile(){
 
     json_object *jrequest = json_object_new_object();    
@@ -363,7 +276,7 @@ int getThreatProfile(){
     return 0;
 
 }
-
+/* This functions reports incidents */
 int reportIncident(const char* filename){
 
   parseJson();
@@ -389,7 +302,6 @@ int reportIncident(const char* filename){
 /* Main function */
 int main(int argc, char *argv[])
 {  
-    signal(SIGUSR1,sigread); //register signal handler to this process 
     pid_t pid;      
  
         //pid  = fork();
