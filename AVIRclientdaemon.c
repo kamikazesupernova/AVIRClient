@@ -13,7 +13,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <stdbool.h>
-/* This program is the Inix installation of the client */
+/* This program is the Unix installation of the client */
 
 
 
